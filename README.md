@@ -14,6 +14,8 @@ Contains every element to create a network and simulate it. It can also provide 
 
 It also acts as a glue between `maggaly` and `train_bot` as it will be responsible of informing each other of the network state and share message between them.
 
+This component WILL BE considered as an interface to communicate important data between every device of the network (`maggaly`, trains, signals, ...) Hence, it's an interface and it can be replaced by an interface between a real network and `maggaly`/`train_bot`.
+
 2. `maggaly`
 
 Contains every component needed to operate the network. As it's meant to be used on a real network, nothing will be done thinking it's just an emulation.

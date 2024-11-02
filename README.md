@@ -26,6 +26,8 @@ Contains every component needed to operate manually a train, make it work when i
 
 ### How I see things (technically)
 
+1. Communication between services
+
 `network_simulator` will be connected to two servers through a `Server-Side Events` connection, meaning both parties can "freely" chat with the simulator. The first connection will be `maggaly` and the second `train_bot`.
 
 Two kind of messages can be exchanged through all the pairs:
@@ -36,15 +38,22 @@ Two kind of messages can be exchanged through all the pairs:
 
 **More events and modifications in the structure of communications may appear in later versions: especially a possible `network_update` event to notify every peer of a change on the network (Current train speed or position.)**
 
+2. Network simulator updates
+
+The network simulator, at each tick, will:
+a. Update static components (incl. triggering events)
+b. Trigger `maggaly`
+c. Update moving components
+
 ### Roadmap
 - [ ] Network
-	- [ ] Components
-		- [ ] Trains
-		- [ ] Traffic lights
-		- [ ] Switches
-		- [ ] Stations
-		- [ ] Train depot
-		- [ ] Rail section
+	- [ ] Components (To be extended later)	
+		- [ ] Trains: moving component
+		- [ ] Traffic lights: static component
+		- [ ] Switches: moving component
+		- [ ] Stations: static component
+		- [ ] Train depot: static component
+		- [ ] Rail section: static component
 	- [ ] Events
 		- [ ] Passenger event (faint, holding doors, emergency break, ...)
 		- [ ] Exploitation event (errors, no more energy, delays, ...)

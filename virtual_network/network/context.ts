@@ -1,4 +1,5 @@
 import { GenericNetworkComponent, GenericVehicle } from "./components/generic";
+import { SwitchesLight } from "./components/lights";
 import { Rails } from "./components/rails";
 import { Station } from "./components/station";
 import { Switches } from "./components/switches";
@@ -13,7 +14,7 @@ export type Vec2 = [number, number];
 export class NetworkContext {
     depots: TrainDepot[];
     trains: GenericVehicle<any>[];
-    lights: GenericNetworkComponent<any>[];
+    lights: SwitchesLight[];
     switches: Switches[];
     stations: Station[];
     railSection: Rails[];

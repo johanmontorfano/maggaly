@@ -64,14 +64,25 @@ $$a = u * 9.81$$
 
 $$v = v^0 - a * t$$
 
+### Network specificities
 
+1. [Signaling](http://www.ferro-lyon.net/Metro-sur-pneus/ligne-D/signalisation-et-equipements-ligne-d)
+
+Since MAGGALY uses "Cantons Mobiles Déformable" instead of static cantons lightings, there's no available physical signaling.
+
+The only signaling of the network are white lights near switches that notify of their state:
+
+![lights](http://www.ferro-lyon.net/xmedia/Images/Metro/ligneD/Signa-D/oeilleton.png)
+
+Hence, only those lights are gonna be implemented. And "Cantons Mobiles Déformables" will be a part of MAGGALY autopilot.
 
 ### Roadmap
 - [ ] Network
 	- [ ] Components (To be extended later)	
 		- [X] Trains: moving component
 		- [ ] Traffic lights: static component
-		- [ ] Switches: moving component
+			- [ ] Try to know how are switches lights placed on the network
+		- [X] Switches: moving component
 		- [X] Stations: static component
 		- [X] Train depot: static component
 		- [X] Rail section: static component
@@ -81,4 +92,5 @@ $$v = v^0 - a * t$$
 		- [ ] Network event (tables modification, ...)
 - [ ] Network controller
 	- [ ] Autopilot
+		- [ ] Consider comfort levels defined by speed.
 	- [X] Manual controller

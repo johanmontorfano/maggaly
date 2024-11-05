@@ -1,7 +1,7 @@
 const canvas = document.createElement("canvas");
 const context2d = canvas.getContext("2d");
 
-let scale = 4;
+let scale = 4;  
 
 async function exec(prom) {
     try {
@@ -10,6 +10,14 @@ async function exec(prom) {
     } catch {
         return {response: null, error: true};
     }
+}
+
+// Automatically determines the color to show depending on the light type
+// and it's status.
+function getColorFromLightType(light) {
+    if (light.type === "SwitchesLight")
+        return light.state.on ? "white" : "gray";
+    return "black";
 }
 
 async function frame() {
@@ -31,18 +39,37 @@ async function frame() {
     context2d.fillRect(0, 0, window.innerWidth, window.innerHeight);
     networkState.railSection.forEach(rail => {
         const points = rail.state.points;
+        const isSwitchSeg = rail.id.startsWith("seg");
 
         context2d.beginPath();
-        context2d.strokeStyle = rail.available ? "white" : "gray";
+        context2d.strokeStyle = isSwitchSeg ? " #FF5733" : "white";
+        if (!rail.available) 
+            context2d.strokeStyle = isSwitchSeg ? "#FF9D88" : "gray";
         context2d.lineWidth = 2 * scale;
         context2d.moveTo(points[0][0] * scale, points[0][1] * scale);
         for (let i = 1; i < points.length; i++)
             context2d.lineTo(points[i][0] * scale, points[i][1] * scale);
         context2d.stroke();
     });
+    networkState.lights.forEach(light => {
+        let {id, position} = light;
+        let [x, y] = position;
+
+        id = id.replace("seg", "");
+        x = x * scale;
+        y = y * scale;
+        context2d.fillStyle = getColorFromLightType(light);
+        context2d.fillRect(
+            x - 2.5 * scale, 
+            y - 2.5 * scale, 
+            5 * scale, 
+            5 * scale
+        );
+        context2d.fillText(id, x - 2.5 * scale, y - 3.5 * scale);
+    });
     networkState.depots.forEach(depot => {
-        const {id} = depot;
-        let [x, y] = depot.position;
+        const {id, position} = depot;
+        let [x, y] = position;
 
         x = x * scale;
         y = y * scale;

@@ -1,0 +1,7 @@
+version = 1
+url = "http://localhost:3000/control/train/in?trainID=fd277722-3071-4860-9771-aaae8cea3375"
+method = "POST"
+
+[headers]
+
+[variables]

@@ -1,5 +1,5 @@
 */Cargo.lock
 Cargo.lock
 
-network_simulator/node_modules
-network_simulator/pnpm-lock.yaml
+virtual_network/node_modules
+virtual_network/pnpm-lock.yaml

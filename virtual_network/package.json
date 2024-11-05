@@ -1,0 +1,16 @@
+{
+    "name": "virtual_network",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "ts-node router.ts"
+    },
+    "dependencies": {
+        "express": "^4.21.1",
+        "uuid": "^11.0.2"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.0",
+        "@types/node": "^22.8.6",
+        "@types/uuid": "^10.0.0"
+    }
+}

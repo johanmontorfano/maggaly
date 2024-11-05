@@ -1,0 +1,7 @@
+version = 1
+url = "http://localhost:3000/control/train/out?depotID=7ccdd0c1-b60c-4b61-aa66-68fb0e680450&train_model=MPL85"
+method = "POST"
+
+[headers]
+
+[variables]

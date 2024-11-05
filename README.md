@@ -1,6 +1,7 @@
 # Métro Automatique à Grand Gabarit de l'Agglomération LYonnaise (MAGGALY)
 
-MAGGALY is the name of the Metro Line D's autopilot. The aim of this project is to recreate some kind of autopilot working on a pseudo-network.
+MAGGALY is the name of the Metro Line D's autopilot. The aim of 
+this project is to recreate some kind of autopilot working on a pseudo-network.
 
 This pseudo-network isn't meant to recreate exactly the state of the Line D, but rather an imaginary line.
 
@@ -45,19 +46,39 @@ a. Update static components (incl. triggering events)
 b. Trigger `maggaly`
 c. Update moving components
 
+### Mathematic formulas
+
+1. Get current speed from inertia through time
+
+Get speed $v$ in m/s, during time $t$ in seconds from an inert position ($t = 0$, where $P$ is the Watt acceleration power and $W$ the object weight in kgs:
+
+$$ v=\sqrt{2Pt/W} $$
+
+2. Get current speed $a$ from top speed, decelerating without brakes, through time. 
+
+We assume $u$, the friction rate, is $0.25$ on rails.:
+
+$$a = u * 9.81$$
+
+**Get current speed at any point of time while decelerating:** with $t$ the elapsed time in seconds and $v^0$ the top speed before starting decelerating:
+
+$$v = v^0 - a * t$$
+
+
+
 ### Roadmap
 - [ ] Network
 	- [ ] Components (To be extended later)	
-		- [ ] Trains: moving component
+		- [X] Trains: moving component
 		- [ ] Traffic lights: static component
 		- [ ] Switches: moving component
-		- [ ] Stations: static component
-		- [ ] Train depot: static component
-		- [ ] Rail section: static component
+		- [X] Stations: static component
+		- [X] Train depot: static component
+		- [X] Rail section: static component
 	- [ ] Events
 		- [ ] Passenger event (faint, holding doors, emergency break, ...)
 		- [ ] Exploitation event (errors, no more energy, delays, ...)
 		- [ ] Network event (tables modification, ...)
 - [ ] Network controller
 	- [ ] Autopilot
-	- [ ] Manual controller
+	- [X] Manual controller

@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true
+    },
+    "exclude": ["node_modules"]
+}

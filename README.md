@@ -76,6 +76,83 @@ The only signaling of the network are white lights near switches that notify of 
 
 Hence, only those lights are gonna be implemented. And "Cantons Mobiles Déformables" will be a part of MAGGALY autopilot.
 
+2. API specifications of MAGGALY
+
+MAGGALY's autopilot is expecting the network adapter to have the following routes available:
+
+**API Entry Definition Model**
+
+```
+[mode] `[path]` 				> [expect]
+	[description]
+
+```
+
+	a. **Network state getters**
+
+GET `/network/get` 				> `Serialized<NetworkContext>`
+	
+	Returns the serialized state of the network.
+
+GET `/network/get?trains` 		> `Serialized<Trains>`
+	
+	Returns the serialized state of trains out of depots in the 
+	network.
+
+GET `/network/get?depots`		> `Serialized<Depots>`
+	
+	Returns the serialized state of depots in the network.
+
+GET `/network/get?switches`		> `Serialized<Switches>`
+	
+	Returns the serialized state of switches in the network.
+
+GET `/network/get?lights`		> `Serialized<Lights>`
+	
+	Returns the serialized state of lights in the network.
+
+GET `/depot/[id]/stock?named` 	> `{[modelName: string]: number}`
+	
+	Returns the stock of a depot. If the named flag is specified, 
+	the stock is returned as `{name: string, model: string}[]`.
+
+GET `/train/[id]/get`			> `"not_found" | Train`
+	
+	Returns the data about a train.
+
+GET `/switch/[id]/get`		> `"not_found" | Switch`
+	
+	Returns the data about a switch.
+
+	b. **Controllers**
+
+POST `/depot/[id]/out?(model | name)`	> `"not_found" | Train?`
+	
+	Take a train out of a depot. The train is selected by `model`
+	or `name`. This route returns `"not_found"` if the depot is not
+	found or the serialized infos of the `Train` taken out.
+
+	Please note that the `Type?` notation implies that `Type` may
+	be empty or `null`.
+
+POST `/train/[id]/in`:					> `"not_found" | string`
+	
+	Take a train in a depot it's stopped in and removes it from the
+	network context. This route
+
+POST `/train/[id]/traction?arate&brate`	> `bool`
+	
+	Change the traction rate/braking rate of a train. It returns
+	`false` in any case where traction data hasn't been updated.
+	
+	Plase note that `arate` stands for `Acceleration Rate` and 
+	`brate` stands for `Braking Rate`.
+
+POST `/switch/toggle/[id]`				> `bool`
+	
+	Toggle a switch. It returns a bool that notifies of how the 
+	operation worked.
+
 ### Roadmap
 - [ ] Network
 	- [ ] Components (To be extended later)	

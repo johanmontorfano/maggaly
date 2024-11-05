@@ -21,7 +21,7 @@ function getColorFromLightType(light) {
 }
 
 async function frame() {
-    const {response, error} = await exec(fetch("/network/get"));
+    const {response, error} = await exec(fetch("/api/network/get"));
     if (error || !response.ok) {
         console.error("No data received from server, next try in 2.5s");
         return setTimeout(() => frame(), 2500);

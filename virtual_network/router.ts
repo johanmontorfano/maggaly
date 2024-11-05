@@ -6,6 +6,7 @@ import { Rails } from "./network/components/rails";
 import { Station } from "./network/components/station";
 import { req, reqapi } from "./easy_import";
 import { initCli } from "./network/cli";
+import { Switches } from "./network/components/switches";
 
 const app = express();
 export const context = new NetworkContext({
@@ -16,11 +17,20 @@ export const context = new NetworkContext({
             new MPL85().setID("303-304")
         ).setID("UTMD")
     ],
-    stations: [new Station("Parilly", [150, 110])],
+    stations: [
+        new Station("Parilly", [110, 110]),
+        new Station("Prout", [180, 20])
+    ],
+    switches: [
+        new Switches(
+            new Rails([80, 20], [110, 20]),
+            new Rails([80, 20], [110, 30])
+        ).setID("UTMD-OUT")
+    ],
     railSection: [
         new Rails([20, 20], [80, 20]),
-        new Rails([80, 20], [110, 110]),
-        new Rails([110, 110], [150, 110])
+        new Rails([110, 30], [110, 110]),
+        new Rails([110, 20], [180, 20])
     ]
 });
 

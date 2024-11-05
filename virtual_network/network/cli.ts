@@ -49,6 +49,15 @@ function network(args: string[], context: NetworkContext) {
         context.trains.forEach(t => {
             console.log(`${t.id}: (${t.position[0]}, ${t.position[1]})`);
         });
+    } else if (args[0] === "switches" && args[1] === "id") {
+        context.switches.forEach(s => {
+            console.log(`${s.id}: ${s.state.opened} opened`);
+        });
+    } else if (args[0] === "switches" && args[1] === "toggle") {
+        const switches = context.switches.filter(s => s.id === args[2]);
+        if (switches.length === 0)
+            return console.error("No switches with this ID found.");
+        switches[0].toggleState();
     } else console.log("Network command not found");
 }
 
@@ -89,6 +98,10 @@ async function cli(context: NetworkContext) {
         console.log("   Show available trains and their position");
         console.log("network trains [name] traction [accrate] [brkrate]");
         console.log("   Set acceleration/braking rate of a train");
+        console.log("network switches id")
+        console.log("   Show available switches and their state");
+        console.log("network switches [name] toggle");
+        console.log("   Toggle the state of a named switch")
     }
     else console.log("Unknown command");
     cli(context);

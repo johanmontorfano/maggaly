@@ -1,6 +1,7 @@
 import { GenericNetworkComponent, GenericVehicle } from "./components/generic";
 import { Rails } from "./components/rails";
 import { Station } from "./components/station";
+import { Switches } from "./components/switches";
 import { TrainDepot } from "./components/train_depot";
 
 export type Vec2 = [number, number];
@@ -13,7 +14,7 @@ export class NetworkContext {
     depots: TrainDepot[];
     trains: GenericVehicle<any>[];
     lights: GenericNetworkComponent<any>[];
-    switches: GenericNetworkComponent<any>[];
+    switches: Switches[];
     stations: Station[];
     railSection: Rails[];
 
@@ -35,7 +36,7 @@ export class NetworkContext {
         depots?: TrainDepot[],
         trains?: GenericVehicle<any>[],
         lights?: GenericNetworkComponent<any>[],
-        switches?: GenericNetworkComponent<any>[],
+        switches?: Switches[],
         stations?: GenericNetworkComponent<any>[],
         railSection?: Rails[],
         maggalyPort?: number,
@@ -74,7 +75,7 @@ export class NetworkContext {
     }
 
     tick() {
-        // TODO: Implement network component updates.
+        this.switches.forEach(s => s.tick(this));
         // TODO: Implement `maggaly` decision making.
         this.trains.forEach(t => t.tick(this));
         // TODO: Implement UI updates.

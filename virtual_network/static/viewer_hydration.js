@@ -33,7 +33,7 @@ async function frame() {
         const points = rail.state.points;
 
         context2d.beginPath();
-        context2d.strokeStyle = "white";
+        context2d.strokeStyle = rail.available ? "white" : "gray";
         context2d.lineWidth = 2 * scale;
         context2d.moveTo(points[0][0] * scale, points[0][1] * scale);
         for (let i = 1; i < points.length; i++)

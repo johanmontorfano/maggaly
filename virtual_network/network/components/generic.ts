@@ -172,6 +172,8 @@ export class GenericVehicle<T> extends GenericNetworkComponent<T> {
             const {points} = rail.state;
             const [x, y] = this.position;
 
+            if (!rail.available)
+                return [];
             for (let i = 1; i < points.length; i++) {
                 const [x1, y1] = points[i - 1];
                 const [x2, y2] = points[i];
@@ -250,7 +252,8 @@ export class GenericVehicle<T> extends GenericNetworkComponent<T> {
             const track = tk[2 - matchPoint] as Vec2;
             const matches = context.railSection.filter(r =>
                 r.state.points[matchPoint][0] === track[0] &&
-                r.state.points[matchPoint][1] === track[1]
+                r.state.points[matchPoint][1] === track[1] &&
+                r.available
             );
 
             // Here we determine how much we overflow/underflow the current

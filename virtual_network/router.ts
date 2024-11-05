@@ -4,7 +4,6 @@ import { TrainDepot } from "./network/components/train_depot";
 import { MPL85 } from "./network/components/train";
 import { Rails } from "./network/components/rails";
 import { Station } from "./network/components/station";
-import { initCli } from "./network/cli";
 import { Switches } from "./network/components/switches";
 import fs from "node:fs";
 
@@ -67,4 +66,8 @@ console.log(`[VirtualNetwork] ${setupRoutes} routes are available.`);
 
 app.listen(3000, () => console.log("[VirtualNetwork] Running on port 3000"));
 
-initCli(context);
+if (process.argv[2] === "--cli") {
+    console.log("CLI requested");
+
+    require("./network/cli").initCli();
+}

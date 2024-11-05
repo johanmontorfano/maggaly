@@ -43,6 +43,8 @@ async function frame() {
 
         context2d.beginPath();
         context2d.strokeStyle = isSwitchSeg ? " #FF5733" : "white";
+        if (!rail.state.electriclyFed)
+            context2d.strokeStyle = "red";
         if (!rail.available) 
             context2d.strokeStyle = isSwitchSeg ? "#FF9D88" : "gray";
         context2d.lineWidth = 2 * scale;

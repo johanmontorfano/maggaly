@@ -80,12 +80,13 @@ Hence, only those lights are gonna be implemented. And "Cantons Mobiles Déforma
 - [ ] Network
 	- [ ] Components (To be extended later)	
 		- [X] Trains: moving component
-		- [ ] Traffic lights: static component
-			- [ ] Try to know how are switches lights placed on the network
+		- [X] Traffic lights: static component
+			- [ ] Try to know how are switches lights placed (a light per switch or a light at the entrance of a switch)
 		- [X] Switches: moving component
 		- [X] Stations: static component
 		- [X] Train depot: static component
 		- [X] Rail section: static component
+			- [ ] Simulate electric alimentation
 	- [ ] Events
 		- [ ] Passenger event (faint, holding doors, emergency break, ...)
 		- [ ] Exploitation event (errors, no more energy, delays, ...)
@@ -93,4 +94,5 @@ Hence, only those lights are gonna be implemented. And "Cantons Mobiles Déforma
 - [ ] Network controller
 	- [ ] Autopilot
 		- [ ] Consider comfort levels defined by speed.
+		- [ ] Implement "Cantons Mobiles Déformables"
 	- [X] Manual controller

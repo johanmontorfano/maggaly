@@ -64,6 +64,21 @@ function network(args: string[], context: NetworkContext) {
             const pos = JSON.stringify(l.position);
             console.log(`${l.id} (${l.type}): ${state} @ ${pos}`);
         });
+    } else if (args[0] === "tracks" && args[1] === "id") {
+        context.railSection.forEach(rail => {
+            const pos = JSON.stringify(rail.state.points);
+            console.log(`${rail.id}: ${pos}`);
+        });
+    } else if (args[0] === "tracks" && args[1] === "electric-state") {
+        context.railSection.forEach(rail => {
+            const {id, state} = rail;
+            console.log(`${id}: V ${state.electriclyFed ? "on" : "off"}`);
+        });
+    } else if (args[0] === "tracks" && args[2] === "toggle-electricity") {
+        const tracks = context.railSection.filter(t => t.id === args[1]);
+        if (tracks.length === 0)
+            return console.error("No tracks with this ID found.");
+        tracks[0].state.electriclyFed = !tracks[0].state.electriclyFed;
     } else console.log("Network command not found");
 }
 
@@ -90,6 +105,10 @@ async function cli(context: NetworkContext) {
     if (tool === "exit") process.exit();
     else if (tool === "network") network(args, context);
     else if (tool === "help") {
+        console.log("\nCLI commands:\n");
+        console.log("exit");
+        console.log("   This is obvious :)");
+        console.log("\nNetwork Tool help:\n");
         console.log("network depots id");
         console.log("   Show available depots and their stock");
         console.log("network depots [name] content");
@@ -110,6 +129,12 @@ async function cli(context: NetworkContext) {
         console.log("   Toggle the state of a named switch");
         console.log("network lights id");
         console.log("   Show available traffic lights with their type/state");
+        console.log("network tracks id");
+        console.log("   Show available tracks and their points");
+        console.log("network tracks electric-state");
+        console.log("   Show available tracks and their electrical state");
+        console.log("network tracks [id] toggle-electricity");
+        console.log("   Toggle electrical feeding of a track");
     }
     else console.log("Unknown command");
     cli(context);

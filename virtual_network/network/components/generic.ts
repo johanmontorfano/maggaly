@@ -145,7 +145,7 @@ export class GenericVehicle<T> extends GenericNetworkComponent<T> {
                 this.lastAccelerationPower < 0);
     }
 
-    private hasCrashed() {
+    hasCrashed() {
         this.available = false;
         this.currentAccelerationPower = 0;
         this.currentSpeed = 0;
@@ -160,7 +160,7 @@ export class GenericVehicle<T> extends GenericNetworkComponent<T> {
 
     /** We determine if the train is on any track. To do this, we check first
     * collinearity and then bounds (within line segments) */
-    private getCurrentTrack(context: NetworkContext): [Rails, Vec2, Vec2] {
+    getCurrentTrack(context: NetworkContext): [Rails, Vec2, Vec2] {
         if (this.currentTrack !== null)
             return [
                 this.currentTrack, 
@@ -193,7 +193,7 @@ export class GenericVehicle<T> extends GenericNetworkComponent<T> {
 
     /** We update the train current speed here. It uses the deceleration speed
     * if the vehicle isn't applying any acceleration power. */
-    private updateCurrentSpeed(context: NetworkContext) {
+    updateCurrentSpeed(context: NetworkContext) {
         const t = (Date.now() / 1000) - (this.accelerationStartedAt / 1000);
 
         if (this.isAccelerating) {

@@ -1,7 +1,0 @@
-version = 1
-url = "http://localhost:3000/network/get"
-method = "GET"
-
-[headers]
-
-[variables]

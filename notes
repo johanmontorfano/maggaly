@@ -1,0 +1,60 @@
+Commande centralisée de MAG ? 
+Non, contexte centralisé seulement pour l'affichage des infos
+
+Niveau d'autonomie des rames ? 
+Totale, chaque rame se pilote indépendamment via des UGTS qui découpent la ligne par section (tronçon)
+
+
+
+********************************************************
+
+
+
+Les sorties et entrées de rames sont faites manuellement
+Voir Programme Exploitation Luminal
+Evènements du réseau requièrent confirmation manuelle pour action
+Contrôle manuel d'une rame influe sur l'exploitation du réseau, elle reste considérée et ne devient pas invisible
+Localisation de la rame sur le réseau: via bandes magnétiques + antennes de triangulation sur le réseau
+
+
+
+********************************************************
+
+
+
+Localisation des rames dans les stations:
+- Audométrie: essieu jamais freiné pour calculer la distance parcourue la plus fiable possible
+- Balises de calibrage présentes sur les voies
+- Contrôle permanent via le tapis Pilote Automtique au sol avec des invariants (éléments du Tapis qui donnent des infos sur la position dans le réseau)
+
+Position précise à 1~3cm près
+
+En cas de délocalisation: FU et traffic sur la ligne arrêtée tant que la rame délocalisée n'est pas relocalisée automatiquement: théoriquement, via quelques techniques MAGGALY peut déterminer la position de la rame sur le réseau sans intervention manuelle.
+
+Position envoyée a l'UGTS
+
+L'UGTS communique son ordre des rames et la dernière position de la rame de devant et invariants (courbes, trains, ...), les UGTS communiquent entre-eux et redonnent le contexte de tout le réseau à la rame.
+
+
+
+
+
+********************************************************
+
+
+
+Dans le cas d'un aiguillage tel que :
+
+--------------------------------
+		/
+	       /                
+              /
+--------------------------------
+
+Les œillets sont placés comme, facing le sens d'arrivée:
+
+---------------------O---<-<-<-
+		/
+	       /
+	      /
+->->->---O---------------------

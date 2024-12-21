@@ -5,6 +5,8 @@ import { context } from "../../router";
 import { pageRouter } from "..";
 import { railsPopup } from "../rails/popup";
 
+let quitting = false;
+
 export class Main extends Page<{}> {
     constructor() {
         super({});
@@ -58,7 +60,17 @@ export class Main extends Page<{}> {
                 }
             }),
             s: () => pageRouter.mountPageOnRouter(2),
-            r: () => railsPopup()
+            r: () => railsPopup(),
+            q: () => {
+                let x = 10;
+
+                if (quitting) return;
+                quitting = true;
+                setInterval(() => {
+                    if (x > 0) console.warn("Quitting in " + x-- + "...");
+                    else process.exit();
+                }, 1000);
+            }
         }
     }
 
@@ -73,6 +85,7 @@ export class Main extends Page<{}> {
         page.addRow(Shortcut("Trains            (t)"));
         page.addRow(Shortcut("Switches          (s)"));
         page.addRow(Shortcut("Rails             (r)"));
+        page.addRow(Shortcut("Quit              (q)"));
         return page;
     }
 }

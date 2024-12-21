@@ -32,7 +32,7 @@ export class Switches extends GenericNetworkComponent<{opened: number}> {
         this.toggleState();
     }
 
-    // Only used to set rails cont id before switches lights are set up since 
+    // Only used to set rails count id before switches lights are set up since 
     // they need to extrapolate the appartenance of a light to a segment to
     // work properly.
     private setRails() {
@@ -86,7 +86,7 @@ export class Switches extends GenericNetworkComponent<{opened: number}> {
             this.contextHasRails = true;
             this.rails.forEach((rail, i) => {
                 rail.setID("seg" + this.id + "(rail-" + i + ")");
-                context.railSection.push(rail);
+                context.sections.push(rail);
             });
             this.lights.forEach((light, i) => {
                 light.setID("seg" + this.id + "(light-" + i + ")");

@@ -1,17 +1,18 @@
-import { NetworkContext } from "../context";
+import { NetworkContext, Vec2 } from "../context";
 import { GenericVehicle } from "./generic";
 
 export class MPL85 extends GenericVehicle<any> {
     private prevElectricState: boolean;
     private prevAccelerationPower: number;
 
-    constructor() {
+    constructor(initialPosition: Vec2 = [0, 0]) {
         super(null, true);
 
         this.maxAccelerationPower = 512000;
         this.maxBrakesPower = 12800;
         this.weight = 69100;
         this.maxSpeed = 20.8;
+        this.position = initialPosition;
 
         this.prevElectricState = true;
         this.prevAccelerationPower = 0;

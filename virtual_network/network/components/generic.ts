@@ -1,7 +1,6 @@
 import { v4 } from "uuid";
 import { NetworkContext, Vec2 } from "../context";
 import { Rails } from "./rails";
-import { match } from "node:assert";
 
 /** Generic class a component should always extend. */
 export class GenericNetworkComponent<T> {
@@ -168,7 +167,7 @@ export class GenericVehicle<T> extends GenericNetworkComponent<T> {
                 this.currentTrack.state.points[1]
             ];
         
-        const matches = context.railSection.map(rail => {
+        const matches = context.sections.map(rail => {
             const {points} = rail.state;
             const [x, y] = this.position;
 
@@ -250,7 +249,7 @@ export class GenericVehicle<T> extends GenericNetworkComponent<T> {
            (newPos[0] <= tk[1][0] && newPos[1] <= tk[1][1] && goingBack)) {
             const matchPoint = goingBack ? 1 : 0;
             const track = tk[2 - matchPoint] as Vec2;
-            const matches = context.railSection.filter(r =>
+            const matches = context.sections.filter(r =>
                 r.state.points[matchPoint][0] === track[0] &&
                 r.state.points[matchPoint][1] === track[1] &&
                 r.available

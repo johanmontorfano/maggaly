@@ -1,35 +1,27 @@
 import express from "express";
 import { NetworkContext } from "./network/context";
-import { TrainDepot } from "./network/components/train_depot";
 import { MPL85 } from "./network/components/train";
-import { Rails } from "./network/components/rails";
-import { Station } from "./network/components/station";
+import { Rails, RailSegmentType } from "./network/components/rails";
 import { Switches } from "./network/components/switches";
 import fs from "node:fs";
 
 const app = express();
 export const context = new NetworkContext({
-    depots: [
-        new TrainDepot(
-            [20, 20], 
-            new MPL85().setID("301-302"), 
-            new MPL85().setID("303-304")
-        ).setID("UTMD")
-    ],
-    stations: [
-        new Station("Parilly", [110, 110]),
-        new Station("Prout", [180, 20])
+    sections: [
+        new Rails(RailSegmentType.Depot, [10, 10], [20, 10]),
+        new Rails(RailSegmentType.Depot, [10, 15], [20, 15]),
+        new Rails(RailSegmentType.None, [30, 20], [30, 30], [35, 35]),
+        new Rails(RailSegmentType.Station, [35, 35], [45, 35])
     ],
     switches: [
         new Switches(
-            new Rails([80, 20], [110, 20]),
-            new Rails([80, 20], [110, 30])
-        ).setID("UTMD-OUT")
+            new Rails(RailSegmentType.Switch, [20, 10], [25, 15], [30, 20]),
+            new Rails(RailSegmentType.Switch, [20, 15], [25, 15], [30, 20])
+        )
     ],
-    railSection: [
-        new Rails([20, 20], [80, 20]),
-        new Rails([110, 30], [110, 110]),
-        new Rails([110, 20], [180, 20])
+    trains: [
+        new MPL85([11, 10]).setID("1"),
+        new MPL85([11, 15]).setID("2")
     ]
 });
 
@@ -55,5 +47,5 @@ app.listen(3000);
 console.log("[VirtualNetwork] Routes setup !");
 if (process.argv[2] === "--cli") {
     console.log("[CLI] CLI requested");
-    require("./network/cli").initCli();
+    require("./cli/index").cli();
 }

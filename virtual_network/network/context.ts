@@ -1,9 +1,8 @@
 import { GenericNetworkComponent, GenericVehicle } from "./components/generic";
 import { SwitchesLight } from "./components/lights";
 import { Rails } from "./components/rails";
-import { Station } from "./components/station";
+import { StaticToken } from "./components/static_token";
 import { Switches } from "./components/switches";
-import { TrainDepot } from "./components/train_depot";
 
 export type Vec2 = [number, number];
 
@@ -12,12 +11,11 @@ export type Vec2 = [number, number];
 * simulations concurrently. */
 // TODO: Replace context values with actual values.
 export class NetworkContext {
-    depots: TrainDepot[];
     trains: GenericVehicle<any>[];
     lights: SwitchesLight[];
     switches: Switches[];
-    stations: Station[];
-    railSection: Rails[];
+    sections: Rails[];
+    tokens: StaticToken[];
 
     maggalyPort: number;
     trainBotPort: number;
@@ -34,21 +32,19 @@ export class NetworkContext {
     private initialState: any;
 
     constructor(initial?: {
-        depots?: TrainDepot[],
         trains?: GenericVehicle<any>[],
         lights?: GenericNetworkComponent<any>[],
         switches?: Switches[],
-        stations?: GenericNetworkComponent<any>[],
-        railSection?: Rails[],
+        sections?: Rails[],
+        staticTokens?: StaticToken[],
         maggalyPort?: number,
         trainBotPort?: number
     }) {
-        this.depots = [];
         this.trains = [];
         this.lights = [];
         this.switches = [];
-        this.stations = [];
-        this.railSection = [];
+        this.sections = [];
+        this.tokens = [];
         this.maggalyPort = 0;
         this.trainBotPort = 0;
         this.startedAt = new Date();
@@ -60,16 +56,23 @@ export class NetworkContext {
         this.resetNetwork();
     }
 
-    resetNetwork() {
+    resetNetwork(wipe = false) {
         const initial = this.initialState;
 
+        if (wipe) {
+            this.initialState = {};
+            this.tokens = [];
+            this.trains = [];
+            this.lights = [];
+            this.switches = [];
+            this.sections = [];
+        }
         if (initial) {
-            this.depots = initial.depots || this.depots;
+            this.tokens = initial.tokens || this.tokens;
             this.trains = initial.trains || this.trains;
             this.lights = initial.lights || this.lights;
             this.switches = initial.switches || this.switches;
-            this.stations = initial.stations || this.stations;
-            this.railSection = initial.railSection || this.railSection;
+            this.sections = initial.sections || this.sections;
             this.maggalyPort = initial.maggalyPort || this.maggalyPort;
             this.trainBotPort = initial.trainBotPort || this.trainBotPort;
         }

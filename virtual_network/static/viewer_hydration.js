@@ -37,16 +37,16 @@ async function frame() {
     context2d.font = context2d.font.replace(/(?<value>\d+\.?\d*)/, 3 * scale);
     context2d.fillStyle = "black";
     context2d.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    networkState.railSection.forEach(rail => {
+    networkState.sections.forEach(rail => {
         const points = rail.state.points;
-        const isSwitchSeg = rail.id.startsWith("seg");
+        const color = rail.type === 0 ?
+            (rail.available ? "#FF9D88" : "#FF5733") :
+            rail.type === 1 ? "#FFFF88" :
+            rail.type === 2 ? "#88FFFF" :
+            (rail.available ? "#FFFFFF" : "#AAAAAA");
 
         context2d.beginPath();
-        context2d.strokeStyle = isSwitchSeg ? " #FF5733" : "white";
-        if (!rail.state.electriclyFed)
-            context2d.strokeStyle = "red";
-        if (!rail.available) 
-            context2d.strokeStyle = isSwitchSeg ? "#FF9D88" : "gray";
+        context2d.strokeStyle = color;
         context2d.lineWidth = 2 * scale;
         context2d.moveTo(points[0][0] * scale, points[0][1] * scale);
         for (let i = 1; i < points.length; i++)
@@ -68,36 +68,6 @@ async function frame() {
             5 * scale
         );
         context2d.fillText(id, x - 2.5 * scale, y - 3.5 * scale);
-    });
-    networkState.depots.forEach(depot => {
-        const {id, position} = depot;
-        let [x, y] = position;
-
-        x = x * scale;
-        y = y * scale;
-        context2d.fillStyle = "red";
-        context2d.fillRect(
-            x - 3.75 * scale, 
-            y - 3.75 * scale, 
-            7.5 * scale, 
-            7.5 * scale
-        );
-        context2d.fillText(id, x - 3.75 * scale, y - 5 * scale);
-    });
-    networkState.stations.forEach(station => {
-        const {name} = station.state;
-        let [x, y] = station.position;
-
-        x = x * scale;
-        y = y * scale;
-        context2d.fillStyle = "green";
-        context2d.fillRect(
-            x - 3.75 * scale, 
-            y - 3.75 * scale, 
-            7.5 * scale, 
-            7.5 * scale
-        );
-        context2d.fillText(name, x - 3.75 * scale, y - 5 * scale);
     });
     networkState.trains.forEach(train => {
         let [x, y] = train.position;

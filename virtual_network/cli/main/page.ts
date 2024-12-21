@@ -3,6 +3,7 @@ import { Page } from "../builder";
 import { ErrorPopup, Shortcut } from "../components";
 import { context } from "../../router";
 import { pageRouter } from "..";
+import { railsPopup } from "../rails/popup";
 
 export class Main extends Page<{}> {
     constructor() {
@@ -56,7 +57,8 @@ export class Main extends Page<{}> {
                         return ErrorPopup("Not Implemented");
                 }
             }),
-            s: () => pageRouter.mountPageOnRouter(2)
+            s: () => pageRouter.mountPageOnRouter(2),
+            r: () => railsPopup()
         }
     }
 
@@ -70,6 +72,7 @@ export class Main extends Page<{}> {
         page.addRow(Shortcut("Network context   (n)"));
         page.addRow(Shortcut("Trains            (t)"));
         page.addRow(Shortcut("Switches          (s)"));
+        page.addRow(Shortcut("Rails             (r)"));
         return page;
     }
 }

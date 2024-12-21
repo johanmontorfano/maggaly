@@ -1,4 +1,3 @@
-import { v4 } from "uuid";
 import { NetworkContext, Vec2 } from "../context";
 import { Rails } from "./rails";
 
@@ -20,7 +19,7 @@ export class GenericNetworkComponent<T> {
         this.position = [0, 0];
         this.currentController = "manual";
         this.unavailableFor = 0;
-        this.id = v4();
+        this.id = Math.floor(Math.random() * 10e6).toString();
         this.type = this.constructor.name;
     }
 

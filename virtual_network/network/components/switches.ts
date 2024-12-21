@@ -85,11 +85,11 @@ export class Switches extends GenericNetworkComponent<{opened: number}> {
         if (!this.contextHasRails) {
             this.contextHasRails = true;
             this.rails.forEach((rail, i) => {
-                rail.setID("seg" + this.id + "(rail-" + i + ")");
+                rail.setID("seg" + this.id + "@" + i);
                 context.sections.push(rail);
             });
             this.lights.forEach((light, i) => {
-                light.setID("seg" + this.id + "(light-" + i + ")");
+                light.setID("seg" + this.id + "&" + i);
                 context.lights.push(light);
             });
         }

@@ -50,12 +50,13 @@ export class Main extends Page<{}> {
                 switch (choice) {
                     case "Control Train":
                         return pageRouter.mountPageOnRouter(1);
-                    case "Exit":
+                    case "Exit" :
                         return;
                     default:
                         return ErrorPopup("Not Implemented");
                 }
-            })
+            }),
+            s: () => pageRouter.mountPageOnRouter(2)
         }
     }
 
@@ -68,6 +69,7 @@ export class Main extends Page<{}> {
         page.addSpacer(1);
         page.addRow(Shortcut("Network context   (n)"));
         page.addRow(Shortcut("Trains            (t)"));
+        page.addRow(Shortcut("Switches          (s)"));
         return page;
     }
 }
